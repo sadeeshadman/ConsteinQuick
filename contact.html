@@ -137,15 +137,19 @@
           </div>
           <div class="form-row">
             <label for="address">Property Address (optional)</label>
-            <input type="text" id="address" name="address" autocomplete="street-address">
+            <input type="text" id="address" name="address" autocomplete="address-line1">
           </div>
           <div class="form-row">
             <label for="message">Tell us about your project</label>
             <textarea id="message" name="message" rows="5" required></textarea>
           </div>
           <input type="hidden" name="_subject" value="New inquiry from consteingroup.ca">
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="visually-hidden" aria-hidden="true">
+            <label for="_gotcha">Leave this field empty</label>
+            <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
           <button type="submit" class="btn btn-accent btn-block">Send Message</button>
+          <output class="form-status" id="form-status" aria-live="polite" tabindex="-1" hidden></output>
           <p class="form-note">By submitting, you agree to be contacted by Constein Group regarding your inquiry. We never share your information.</p>
         </form>
       </div>

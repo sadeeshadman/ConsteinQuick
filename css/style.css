@@ -486,6 +486,15 @@ img { max-width: 100%; display: block; }
 }
 .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 8px; }
+.form-status {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.form-status.is-success { background: #e8f5ed; color: #17643a; }
+.form-status.is-error { background: #fff0ee; color: #9a271d; }
+.contact-form button:disabled { cursor: wait; opacity: 0.72; }
 
 .contact-info-list { list-style: none; margin: 0 0 32px; padding: 0; }
 .contact-info-list li {

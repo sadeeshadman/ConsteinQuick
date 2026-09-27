@@ -25,6 +25,45 @@ document.addEventListener("DOMContentLoaded", function () {
     yearEl.textContent = new Date().getFullYear();
   }
 
+  var contactForm = document.querySelector(".contact-form");
+  var formStatus = document.getElementById("form-status");
+  if (contactForm && formStatus) {
+    contactForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      var submitButton = contactForm.querySelector("[type=\"submit\"]");
+      var originalButtonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending…";
+      formStatus.hidden = true;
+      formStatus.className = "form-status";
+
+      try {
+        var response = await fetch(contactForm.action, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
+
+        contactForm.reset();
+        formStatus.textContent = "Thank you! Your message has been sent. We’ll be in touch soon.";
+        formStatus.classList.add("is-success");
+      } catch (error) {
+        formStatus.textContent = "Sorry, we couldn’t send your message. Please try again or email info@consteingroup.ca.";
+        formStatus.classList.add("is-error");
+      } finally {
+        formStatus.hidden = false;
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+        formStatus.focus();
+      }
+    });
+  }
+
   // Add a shadow to the header once the page has scrolled
   if (header) {
     var onScroll = function () {
